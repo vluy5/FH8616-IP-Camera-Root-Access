@@ -31,8 +31,9 @@ mount -t sysfs none /sys
 mount -t ramfs ramfs /home
 ```
 # 2. Создаем узлы устройств и инициализируем менеджер устройств
+```
 mdev -s
-
+```
 # 3. Запускаем штатный скрипт монтирования разделов прошивки (/app, /app/userdata, /app/res)
 ```sh
 /etc/init.d/S02init_rootfs
