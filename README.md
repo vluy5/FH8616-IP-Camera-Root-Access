@@ -1,3 +1,11 @@
+## ⚠️ Prerequisites & Hardware Hookup (Требования к железу)
+
+To execute the commands and achieve root access, you **must physically solder to the camera's UART pins** (TX, RX, GND) to monitor the boot process, interrupt U-Boot, and interact with the minimal shell.
+
+* **UART Connection:** Connect the camera's TX/RX lines to a USB-to-UART adapter or use a custom microcontroller setup (such as a **Waveshare RP2040-Zero**).
+* **RP2040-Zero Automation:** In this repository, you will find separate script files (`code.py` / firmware) configured for the RP2040-Zero to handle automated serial interaction, injection, or peripheral control.
+* 
+#You can download the patched camera binary from the project's releases.
 # FH8616-IP-Camera-Root-Access
 Full root access, persistence, AP mode, and RTSP stream configuration for Fullhan FH8616 based IP cameras (QN-L23PA0900, gc2053).
 
@@ -27,7 +35,11 @@ Research, root persistence guide, and local streaming configuration for budget I
 # 1. Монтируем базовые виртуальные файловые системы
 ```sh
 mount -t proc proc /proc
+```
+```
 mount -t sysfs none /sys
+```
+```
 mount -t ramfs ramfs /home
 ```
 # 2. Создаем узлы устройств и инициализируем менеджер устройств
@@ -41,7 +53,8 @@ mdev -s
 # 4. Экспортируем системные пути и переменные окружения
 ```sh
 export PATH=/bin:/sbin:/app/bin:/app/abin:/app:/usr/bin
-
+```
+```
 export LD_LIBRARY_PATH=/lib:/usr/lib:/app/lib
 ```
 Шаг 2. Смена пароля суперпользователя (root)
@@ -49,6 +62,8 @@ export LD_LIBRARY_PATH=/lib:/usr/lib:/app/lib
 
 ```sh
 passwd
+```
+```
 root
 ```
 Проверьте текущий сгенерированный хэш пароля в файле /etc/shadow:
@@ -79,7 +94,8 @@ cat /app/userdata/shadow
 
 ```
 /app/app_shadow.sh
-
+```
+```
 cat /etc/shadow
 ```
 Если хэш root в /etc/shadow совпал с файлом в userdata, значит механизм автоприменения настроен верно.
